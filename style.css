@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&display=swap');
+
+* {
+    font-family: "Roboto", Helvetica, sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    box-sizing: border-box;
+    color: rgb(230, 230, 230);
+    text-wrap: wrap;
+    word-wrap: break-word;
+}
+
+html, 
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(197, 197, 197);
+    margin: 0;
+}
+
+.container {
+    background-color: black;
+    border-radius: 48px;
+    width: 350px;
+    height: 650px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.orange {
+    background-color: #e68600;
+}
+
+.orange:hover {
+    background-color: #febd62;
+}
+
+button {
+    border-radius: 30px;
+    background-color: #303030;
+    border: none;
+    height: 60px;
+    width: 60px;
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    background-color: #a2a2a2;
+}
+
+
+.silver {
+    background-color: #B4B4B2;
+    color: #303030;
+}
+
+.silver:hover {
+    background-color: #dadada;
+}
+
+.zero {
+    text-align: left;
+    padding-left: 20px;
+    flex-grow: 0.7;
+}
+
+.calculation-text {
+    color: #B4B4B2;
+    font-size: 20px;
+}
+
+.result-text {
+    text-align: right;
+    font-size: 64px;
+    font-weight: 300;
+}
+
+.result-text>text {
+    font-size: 64px;
+    font-weight: 300;
+}
+
+.result-container,
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.result-container {
+    padding: 10% 0;
+    height: 40%;
+}
+
+.buttons-container {
+    height: 60%;
+}
