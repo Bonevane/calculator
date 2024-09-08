@@ -30,6 +30,7 @@ let firstCalc = "0";
 let secondCalc = "";
 let currentSymbol = "";
 
+
 nums.forEach(element => {
     element.onclick = () => {
         if(currentSymbol == ""){
@@ -50,7 +51,7 @@ nums.forEach(element => {
                 result.textContent = secondCalc;
         }
 
-        calculation.textContent = firstCalc + " " + currentSymbol + " " + secondCalc;
+        updateText();
     }
 });
 
@@ -62,6 +63,7 @@ clear.onclick = () => {
     currentSymbol = "";
     resetSymbols();
     changeColor();
+    updateText();
 };
 
 symbols.forEach(element => {
@@ -76,7 +78,7 @@ symbols.forEach(element => {
         resetSymbols();
         element.active = true;
         changeColor();
-        calculation.textContent = firstCalc + " " + currentSymbol + " " + secondCalc;
+        updateText();
     }
 });
 
@@ -85,7 +87,6 @@ equalsBtn.onclick = () => {
 
     resetSymbols();
     changeColor();
-
 };
 
 percentBtn.onclick = () => {
@@ -102,8 +103,8 @@ percentBtn.onclick = () => {
         if(secondCalc != "")
             result.textContent = secondCalc;
     }
-    calculation.textContent = firstCalc + " " + currentSymbol + " " + secondCalc;
 
+    updateText();
 }
 
 periodBtn.onclick = () => {
@@ -121,7 +122,7 @@ periodBtn.onclick = () => {
             result.textContent = secondCalc;
     }
 
-    calculation.textContent = firstCalc + " " + currentSymbol + " " + secondCalc;
+    updateText();
 };
 
 negativeBtn.onclick = () => {
@@ -143,7 +144,7 @@ negativeBtn.onclick = () => {
             result.textContent = secondCalc;
     }
 
-    calculation.textContent = firstCalc + " " + currentSymbol + " " + secondCalc;
+    updateText();
 };
 
 removeBtn.onclick = () => {
@@ -165,7 +166,7 @@ removeBtn.onclick = () => {
             result.textContent = secondCalc;
     }
 
-    calculation.textContent = firstCalc + " " + currentSymbol + " " + secondCalc;
+    updateText();
 };
 
 
@@ -189,6 +190,10 @@ function resetSymbols() {
     });
 }
 
+function updateText() {
+    calculation.textContent = firstCalc + " " + currentSymbol + " " + secondCalc;
+    resizeText({elements: document.querySelectorAll('.resizeable')});
+}
 
 
 // Calculator Functions
@@ -238,10 +243,23 @@ function equals() {
 }
 
 
-console.log(add);
-console.log(subtract);
-console.log(multiply);
-console.log(divide);
-console.log(result);
-console.log(calculation);
+// Overflow adjustable size
+const isOverflown = ({ clientHeight, scrollHeight }) => scrollHeight > clientHeight
 
+const resizeText = ({ element, elements, minSize = 10, maxSize = 64, step = 1, unit = 'px' }) => {
+  (elements || [element]).forEach(el => {
+    let i = minSize
+    let overflow = false
+
+        const parent = el.parentNode
+
+    while (!overflow && i < maxSize) {
+        el.style.fontSize = `${i}${unit}`
+        overflow = isOverflown(parent)
+
+      if (!overflow) i += step
+    }
+
+    el.style.fontSize = `${i - step}${unit}`
+  })
+}

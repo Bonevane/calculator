@@ -7,7 +7,7 @@
     box-sizing: border-box;
     color: rgb(230, 230, 230);
     text-wrap: wrap;
-    word-wrap: break-word;
+    word-wrap:break-word;
 }
 
 html, 
@@ -45,11 +45,16 @@ body {
     background-color: #e68600;
 }
 
-.orange:hover {
-    background-color: #febd62;
+
+@media (hover: hover) {
+    .orange:hover {
+        background-color: #febd62;
+    }
 }
 
-
+.orange:active {
+    background-color: #febd62;
+}
 
 
 button {
@@ -76,7 +81,13 @@ button:active {
     color: #303030;
 }
 
-.silver:hover {
+@media (hover: hover) {
+    .silver:hover {
+        background-color: #dadada;
+    }
+}
+
+.silver:active {
     background-color: #dadada;
 }
 
