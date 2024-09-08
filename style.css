@@ -49,6 +49,9 @@ body {
     background-color: #febd62;
 }
 
+
+
+
 button {
     border-radius: 30px;
     background-color: #303030;
@@ -58,10 +61,15 @@ button {
     transition-duration: 0.4s;
 }
 
-button:hover {
-    background-color: #a2a2a2;
+@media (hover: hover) {
+    button:hover {
+        background-color: #a2a2a2;
+    }
 }
 
+button:active {
+    background-color: #a2a2a2;
+}
 
 .silver {
     background-color: #B4B4B2;

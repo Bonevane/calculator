@@ -17,6 +17,9 @@ const divideBtn = {
 
 const equalsBtn = document.querySelector(".equals");
 const percentBtn = document.querySelector(".percent");
+const periodBtn = document.querySelector(".period");
+const negativeBtn = document.querySelector(".negative");
+const removeBtn = document.querySelector(".result-container");
 const clear = document.querySelector(".AC");
 const nums = document.querySelectorAll(".num");
 const result = document.querySelector(".result-text");
@@ -54,12 +57,12 @@ nums.forEach(element => {
 clear.onclick = () => {
     result.textContent = "0";
     calculation.textContent = "";
-    firstCalc = "";
+    firstCalc = "0";
     secondCalc = "";
     currentSymbol = "";
     resetSymbols();
     changeColor();
-}
+};
 
 symbols.forEach(element => {
     element.element.onclick = () => {
@@ -77,32 +80,13 @@ symbols.forEach(element => {
     }
 });
 
-function changeColor() {
-    symbols.forEach(element => {
-        if(element.active){
-            element.element.style.backgroundColor = "rgb(230, 230, 230)";
-            element.element.style.color = "#e68600";
-        }
-        else{
-            element.element.style.backgroundColor = null;
-            element.element.style.color = null;
-        }
-    });
-}
-
-function resetSymbols() {
-    symbols.forEach(element => {
-        element.active = false;
-    });
-}
-
 equalsBtn.onclick = () => {
     equals();
 
     resetSymbols();
     changeColor();
 
-}
+};
 
 percentBtn.onclick = () => {
     if(currentSymbol == ""){
@@ -120,6 +104,89 @@ percentBtn.onclick = () => {
     }
     calculation.textContent = firstCalc + " " + currentSymbol + " " + secondCalc;
 
+}
+
+periodBtn.onclick = () => {
+    if(currentSymbol == ""){
+        if(firstCalc[firstCalc.length - 1] != ".")
+            firstCalc += periodBtn.textContent;
+
+        result.textContent = firstCalc;        
+    }
+    else {
+        if(secondCalc[firstCalc.length - 1] != ".")
+            secondCalc += periodBtn.textContent;
+
+        if(secondCalc != "")
+            result.textContent = secondCalc;
+    }
+
+    calculation.textContent = firstCalc + " " + currentSymbol + " " + secondCalc;
+};
+
+negativeBtn.onclick = () => {
+    if(currentSymbol == "" && firstCalc != "0" && firstCalc != ""){
+        if(firstCalc[0] != "-")
+            firstCalc = "-" + firstCalc;
+        else
+            firstCalc = firstCalc.slice(1);
+
+        result.textContent = firstCalc;        
+    }
+    else if(secondCalc != "" && secondCalc != "0"){
+        if(secondCalc[0] != "-")
+            secondCalc = "-" + secondCalc;
+        else
+            secondCalc = secondCalc.slice(1);
+
+        if(secondCalc != "")
+            result.textContent = secondCalc;
+    }
+
+    calculation.textContent = firstCalc + " " + currentSymbol + " " + secondCalc;
+};
+
+removeBtn.onclick = () => {
+    if(currentSymbol == "" && firstCalc != ""){
+        firstCalc = firstCalc.slice(0, -1);
+
+        if(firstCalc == "" || firstCalc == "-")
+            firstCalc = "0";
+
+        result.textContent = firstCalc;        
+    }
+    else if(secondCalc != ""){
+        secondCalc = secondCalc.slice(0, -1);
+
+        if(secondCalc == "" || secondCalc == "-")
+            secondCalc = "0";
+
+        if(secondCalc != "")
+            result.textContent = secondCalc;
+    }
+
+    calculation.textContent = firstCalc + " " + currentSymbol + " " + secondCalc;
+};
+
+
+
+function changeColor() {
+    symbols.forEach(element => {
+        if(element.active){
+            element.element.style.backgroundColor = "rgb(230, 230, 230)";
+            element.element.style.color = "#e68600";
+        }
+        else{
+            element.element.style.backgroundColor = null;
+            element.element.style.color = null;
+        }
+    });
+};
+
+function resetSymbols() {
+    symbols.forEach(element => {
+        element.active = false;
+    });
 }
 
 
@@ -143,9 +210,9 @@ function multiply(num1, num2) {
 
 function equals() {
     if(currentSymbol != ""){
-        if(secondCalc == "")
+        if(secondCalc == "" || secondCalc == ".")
             secondCalc = "0";
-        if(firstCalc == "")
+        if(firstCalc == "" || firstCalc == ".")
             firstCalc = "0";
         calculation.textContent = firstCalc + " " + currentSymbol + " " + secondCalc;
     }
