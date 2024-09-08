@@ -84,7 +84,7 @@ symbols.forEach(element => {
 
 equalsBtn.onclick = () => {
     equals();
-
+    updateText();
     resetSymbols();
     changeColor();
 };
@@ -94,7 +94,7 @@ percentBtn.onclick = () => {
         if(firstCalc != "0" && firstCalc != "")
             firstCalc = (parseFloat(firstCalc) / 100).toString();
 
-        result.textContent = firstCalc;        
+        result.textContent = firstCalc;
     }
     else {
         if(secondCalc != "" && secondCalc != "0")
@@ -219,20 +219,19 @@ function equals() {
             secondCalc = "0";
         if(firstCalc == "" || firstCalc == ".")
             firstCalc = "0";
-        calculation.textContent = firstCalc + " " + currentSymbol + " " + secondCalc;
     }
     switch (currentSymbol){
         case "+":
-            result.textContent = add(parseFloat(firstCalc), parseFloat(secondCalc));
+            result.textContent = precisionRound(add(parseFloat(firstCalc), parseFloat(secondCalc)), 5);
             break;
         case "-":
-            result.textContent = subtract(parseFloat(firstCalc), parseFloat(secondCalc));
+            result.textContent = precisionRound(subtract(parseFloat(firstCalc), parseFloat(secondCalc), 5));
             break;
         case "x":
-            result.textContent = multiply(parseFloat(firstCalc), parseFloat(secondCalc));
+            result.textContent = precisionRound(multiply(parseFloat(firstCalc), parseFloat(secondCalc)), 5);
             break;
         case "÷":
-            result.textContent = divide(parseFloat(firstCalc), parseFloat(secondCalc));
+            result.textContent = precisionRound(divide(parseFloat(firstCalc), parseFloat(secondCalc)), 5);
             break;
         default:
             result.textContent = firstCalc;
@@ -240,6 +239,11 @@ function equals() {
     }
 
     return result.textContent;
+}
+
+function precisionRound(number, precision) {
+    var factor = Math.pow(10, precision);
+    return Math.round(number * factor) / factor;
 }
 
 
