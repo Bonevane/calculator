@@ -109,13 +109,13 @@ percentBtn.onclick = () => {
 
 periodBtn.onclick = () => {
     if(currentSymbol == ""){
-        if(firstCalc[firstCalc.length - 1] != ".")
+        if(!firstCalc.includes("."))
             firstCalc += periodBtn.textContent;
 
         result.textContent = firstCalc;        
     }
     else {
-        if(secondCalc[firstCalc.length - 1] != ".")
+        if(!secondCalc.includes("."))
             secondCalc += periodBtn.textContent;
 
         if(secondCalc != "")
